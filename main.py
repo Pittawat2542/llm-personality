@@ -25,7 +25,8 @@ def evaluate_personality(model: Annotated[str, typer.Option("--model", "-m", hel
                              PersonalityType, typer.Option("--personality", "-p", help="Personality type")],
                          interaction_type: Annotated[
                              InteractionType, typer.Option("--interaction", "-i", help="Interaction type")]):
-    experiment_id = f"{personality_type}_{interaction_type}_{model}_{datetime.now().isoformat()}"
+    experiment_id = f"{personality_type}_{interaction_type}_{model}"
+    #experiment_id = f"{personality_type}_{interaction_type}_{model}_{datetime.now().isoformat()}
     logger.info(f"Running experiment {experiment_id}")
 
     output_path = Path("outputs") / experiment_id
