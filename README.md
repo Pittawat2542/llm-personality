@@ -36,4 +36,4 @@ Options for the main program are
 - `-p`, `--personality`: personality type. Possible
   values: `"no_personality", "agreeableness", "conscientiousness", "extraversion", "neuroticism", "openness"`
     - `-i`, `--interaction`: interaction type. Possible
-      values: `"all_at_once", one_at_a_time_same_context", "one_at_a_time_new_context"`
+      values: `"all_at_once", "one_at_a_time_same_context", "one_at_a_time_new_context"`
