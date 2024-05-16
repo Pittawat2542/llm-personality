@@ -6,8 +6,8 @@ class PersonalityType(Enum):
     AGREEABLENESS = "agreeableness"
     CONSCIENTIOUSNESS = "conscientiousness"
     EXTROVERSION = "extroversion"
-    NEUROTICISM = "neuroticism"
-    OPENNESS_TO_EXPERIENCE = "openness_to_experience"
+    EMOTIONAL_STABILITY = "neuroticism"
+    INTELLECT = "intellect"
 
 
 class InteractionType(Enum):

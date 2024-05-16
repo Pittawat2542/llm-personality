@@ -5,12 +5,12 @@ def parse_response(response: str) -> int:
         return int(raw_response)
     except ValueError:
         raw_response = raw_response.lower()
-        map = {
-            "disagree": 1,
-            "slightly disagree": 2,
-            "neutral": 3,
-            "slightly agree": 4,
-            "agree": 5
+        score_map = {
+            "very inaccurate": 1,
+            "moderately inaccurate": 2,
+            "neither accurate nor inaccurate": 3,
+            "moderately accurate": 4,
+            "very accurate": 5
         }
 
-        return map[raw_response]
+        return score_map[raw_response]
