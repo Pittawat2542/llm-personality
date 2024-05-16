@@ -140,7 +140,7 @@ Questions:
         raw_scores[26]) - (raw_scores[31]) + (raw_scores[36]) + (raw_scores[41]) + (raw_scores[46])
     conscientiousness = 14 + (raw_scores[2]) - (raw_scores[7]) + (raw_scores[12]) - (raw_scores[17]) + (
         raw_scores[22]) - (raw_scores[27]) + (raw_scores[32]) - (raw_scores[37]) + (raw_scores[42]) + (raw_scores[47])
-    neuroticism = 38 - (raw_scores[3]) + (raw_scores[8]) - (raw_scores[13]) + (raw_scores[18]) - (raw_scores[23]) + (
+    neuroticism = 38 - (raw_scores[3]) + (raw_scores[8]) - (raw_scores[13]) + (raw_scores[18]) - (raw_scores[23]) - (
         raw_scores[28]) - (raw_scores[33]) - (raw_scores[38]) - (raw_scores[43]) - (raw_scores[48])
     openness = 8 + (raw_scores[4]) - (raw_scores[9]) + (raw_scores[14]) - (raw_scores[19]) + (raw_scores[24]) - (
         raw_scores[29]) + (raw_scores[34]) + (raw_scores[39]) + (raw_scores[44]) + (raw_scores[49])
