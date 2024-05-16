@@ -65,13 +65,19 @@ def evaluate_personality(model: Annotated[str, typer.Option("--model", "-m", hel
         i = 0
         for question in track(questions, description="Processing questions"):
             logger.info(f"Processing question: {question}")
-            prompt = f"""Answer the following question. The question has {len(choices)} choices. Choices are:
+            prompt = f"""You are answering a questionnaire. Answer the following question. The question has {len(choices)} choices.
+            
+Choices are:
 {"\n".join(choices)}.
 
-Answer each question with only the question index followed by a colon and then the number of the choice in a new line. Do not include full answers in the same line.
+Answer each question with only the question index followed by a colon and then the number of the choice in one new line. For example, `x: y`. Do not include full answers in the same line.
+
+It's a question from a personality test. Please answer honestly.
 
 Question:
 {question}
+
+Answer:
 """
 
             history.append({
@@ -99,13 +105,19 @@ Question:
                 })
                 logger.info(f"Added assistant response to history")
     else:
-        prompt = f"""Answer the following questions. Each question has {len(choices)} choices. Choices are:
+        prompt = f"""You are answering a questionnaire. Answer the following questions. Each question has {len(choices)} choices.
+        
+Choices are:
 {"\n".join(choices)}.
 
-Answer each question with only the question index followed by a colon and then the number of the choice in a new line. Do not include full answers in the same line.
+Answer each question with only the question index followed by a colon and then the number of the choice in one new line. For example, `x: y`. Do not include full answers in the same line.
 
-Questions:
+It's a question from a personality test. Please answer honestly.
+
+Question:
 {"\n".join(questions)}
+
+Answer:
 """
         history.append({
             "role": "user",
