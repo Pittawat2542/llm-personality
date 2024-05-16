@@ -45,7 +45,8 @@ def evaluate_personality(model: Annotated[str, typer.Option("--model", "-m", hel
 
     logger.info(f"Loaded IPIP-50 questions: {len(questions)} questions")
 
-    choices = ["1: Very Inaccurate", "2: Moderately Inaccurate", "3: Neither Accurate Nor Inaccurate", "4: Moderately Accurate", "5: Very Accurate"]
+    choices = ["1: Very Inaccurate", "2: Moderately Inaccurate", "3: Neither Accurate Nor Inaccurate",
+               "4: Moderately Accurate", "5: Very Accurate"]
 
     experimental_result = ExperimentalResult(experiment=experiment, results=[])
 
@@ -141,9 +142,9 @@ Questions:
     conscientiousness = 14 + (raw_scores[2]) - (raw_scores[7]) + (raw_scores[12]) - (raw_scores[17]) + (
         raw_scores[22]) - (raw_scores[27]) + (raw_scores[32]) - (raw_scores[37]) + (raw_scores[42]) + (raw_scores[47])
     emotional_stability = 38 - (raw_scores[3]) + (raw_scores[8]) - (raw_scores[13]) + (raw_scores[18]) - (
-    raw_scores[23]) - (
+        raw_scores[23]) - (
                               raw_scores[28]) - (raw_scores[33]) - (raw_scores[38]) - (raw_scores[43]) - (
-                          raw_scores[48])
+                              raw_scores[48])
     intellect = 8 + (raw_scores[4]) - (raw_scores[9]) + (raw_scores[14]) - (raw_scores[19]) + (raw_scores[24]) - (
         raw_scores[29]) + (raw_scores[34]) + (raw_scores[39]) + (raw_scores[44]) + (raw_scores[49])
 
@@ -160,6 +161,17 @@ Questions:
     experimental_result_path = output_path / "experimental_result.json"
     experimental_result_path.write_text(experimental_result.json(exclude={"experiment": {"llm"}}))
     logger.info(f"Saved experimental result to {experimental_result_path}")
+
+
+def run_experiment(model: Annotated[str, typer.Option("--model", "-m", help="Model to use")]):
+    all_personalities = [PersonalityType.AGREEABLENESS, PersonalityType.CONSCIENTIOUSNESS, PersonalityType.EXTROVERSION,
+                         PersonalityType.EMOTIONAL_STABILITY, PersonalityType.INTELLECT, PersonalityType.NO_PERSONALITY]
+    all_interactions = [InteractionType.ALL_AT_ONCE, InteractionType.ONE_AT_A_TIME_NEW_CONTEXT,
+                        InteractionType.ONE_AT_A_TIME_SAME_CONTEXT]
+
+    for personality in all_personalities:
+        for interaction in all_interactions:
+            evaluate_personality(model=model, personality_type=personality, interaction_type=interaction)
 
 
 if __name__ == "__main__":
