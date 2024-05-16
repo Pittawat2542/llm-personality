@@ -190,6 +190,11 @@ def run_experiment(model: Annotated[str, typer.Option("--model", "-m", help="Mod
 @app.command()
 def analyse():
     result_files = Path("outputs").rglob("personality_result.json")
+
+    with open(Path("outputs") / "personality_results.csv", "w") as file:
+        file.write(f"personality_type,interaction_type,model,intellect,conscientiousness,extroversion,agreeableness,"
+                   f"emotional_stability\n")
+
     for result in result_files:
         if result.parent.parent.name.startswith("V"):
             continue

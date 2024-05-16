@@ -1,3 +1,4 @@
+personality_type,interaction_type,model,intellect,conscientiousness,extroversion,agreeableness,emotional_stability
 CONSCIENTIOUSNESS,ALL_AT_ONCE,gpt-3.5-turbo-0125,30,36,29,36,28
 NO_PERSONALITY,ONE_AT_A_TIME_NEW_CONTEXT,gpt-3.5-turbo-0125,31,-972,19,36,24
 EMOTIONAL_STABILITY,ONE_AT_A_TIME_SAME_CONTEXT,gpt-3.5-turbo-0125,33,32,22,38,31
