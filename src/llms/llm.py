@@ -11,5 +11,5 @@ class LLM(ABC, BaseModel):
     client: Any
 
     @abstractmethod
-    def generate_content(self, messages: ConversationHistory, temperature=0.0, seed=42) -> GenerativeModelResponse:
+    def generate_content(self, messages: ConversationHistory, temperature=0.0, seed=2024) -> GenerativeModelResponse:
         pass
