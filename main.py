@@ -187,6 +187,25 @@ def run_experiment(model: Annotated[str, typer.Option("--model", "-m", help="Mod
             evaluate_personality(model, personality, interaction)
 
 
+@app.command()
+def analyse():
+    result_files = Path("outputs").rglob("personality_result.json")
+    for result in result_files:
+        if result.parent.parent.name.startswith("V"):
+            continue
+
+        personality_type = result.parent.name.split("PersonalityType.")[1].split("_In")[0]
+        interaction_type = result.parent.name.split("_InteractionType.")[1].split("_g")[0]
+        model = "g" + result.parent.name.split("_g")[1]
+
+        personality_result = PersonalityResult.parse_file(result)
+
+        with open(Path("outputs") / "personality_results.csv", "a") as file:
+            file.write(f"{personality_type},{interaction_type},{model},{personality_result.intellect},"
+                       f"{personality_result.conscientiousness},{personality_result.extroversion},"
+                       f"{personality_result.agreeableness},{personality_result.emotional_stability}\n")
+
+
 if __name__ == "__main__":
     load_dotenv()
     app()
