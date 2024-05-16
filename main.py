@@ -1,4 +1,3 @@
-from datetime import datetime
 from pathlib import Path
 
 import typer
@@ -15,6 +14,7 @@ from src.models.result_record import ResultRecord
 from src.prompts.personality import get_personality_prompt
 from src.types.experiment import PersonalityType, InteractionType
 from src.types.openai import ConversationHistory
+from src.utils import parse_response
 
 app = typer.Typer()
 
@@ -26,7 +26,6 @@ def evaluate_personality(model: Annotated[str, typer.Option("--model", "-m", hel
                          interaction_type: Annotated[
                              InteractionType, typer.Option("--interaction", "-i", help="Interaction type")]):
     experiment_id = f"{personality_type}_{interaction_type}_{model}"
-    #experiment_id = f"{personality_type}_{interaction_type}_{model}_{datetime.now().isoformat()}
     logger.info(f"Running experiment {experiment_id}")
 
     output_path = Path("outputs") / experiment_id
@@ -46,7 +45,7 @@ def evaluate_personality(model: Annotated[str, typer.Option("--model", "-m", hel
 
     logger.info(f"Loaded IPIP-50 questions: {len(questions)} questions")
 
-    choices = ["1: Disagree", "2: Slighly disagree", "3: Neutral", "4: Slightly agree", "5: Agree"]
+    choices = ["1: Disagree", "2: Slightly disagree", "3: Neutral", "4: Slightly agree", "5: Agree"]
 
     experimental_result = ExperimentalResult(experiment=experiment, results=[])
 
@@ -68,7 +67,7 @@ def evaluate_personality(model: Annotated[str, typer.Option("--model", "-m", hel
             prompt = f"""Answer the following question. The question has {len(choices)} choices. Choices are:
 {"\n".join(choices)}.
 
-Answer each question with only the question index followed by a colon and then the number of the choice in a new line.
+Answer each question with only the question index followed by a colon and then the number of the choice in a new line. Do not include full answers in the same line.
 
 Question:
 {question}
@@ -81,7 +80,7 @@ Question:
 
             logger.info(f"Interacting with {model} with the following prompt:\n{history}")
             response = experiment.llm.generate_content(history)
-            parsed_response = int(response[0].split(":")[-1].strip())
+            parsed_response = parse_response(response[0])
 
             result_record = ResultRecord(id=i, question=question, prompt=history, raw_output=response,
                                          parsed_output=parsed_response)
@@ -102,7 +101,7 @@ Question:
         prompt = f"""Answer the following questions. Each question has {len(choices)} choices. Choices are:
 {"\n".join(choices)}.
 
-Answer each question with only the question index followed by a colon and then the number of the choice in a new line.
+Answer each question with only the question index followed by a colon and then the number of the choice in a new line. Do not include full answers in the same line.
 
 Questions:
 {"\n".join(questions)}
@@ -115,7 +114,7 @@ Questions:
         logger.info(f"Interacting with {model} with the following prompt:\n{history}")
         response = experiment.llm.generate_content(history)
         raw_parsed_response = response[0].splitlines()
-        raw_parsed_response = [int(line.split(":")[-1].strip()) for line in raw_parsed_response]
+        raw_parsed_response = [parse_response(line) for line in raw_parsed_response]
 
         i = 0
         for question, parsed_response in zip(questions, raw_parsed_response):
