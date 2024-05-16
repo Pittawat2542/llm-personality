@@ -34,6 +34,6 @@ Options for the main program are
 - `-m`, `--model`: model to use. Possible
   values: `"gpt-4o-2024-05-13", "gpt-4-turbo-2024-04-09", "gpt-4-0613", "gpt-3.5-turbo-0125"`
 - `-p`, `--personality`: personality type. Possible
-  values: `"no_personality", "agreeableness", "conscientiousness", "extroversion", "neuroticism", "openness_to_experience"`
+  values: `"no_personality", "agreeableness", "conscientiousness", "extroversion", "emotional_stability", "intellect"`
     - `-i`, `--interaction`: interaction type. Possible
       values: `"all_at_once", "one_at_a_time_same_context", "one_at_a_time_new_context"`
