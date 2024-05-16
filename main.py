@@ -175,6 +175,7 @@ Answer:
     logger.info(f"Saved experimental result to {experimental_result_path}")
 
 
+@app.command()
 def run_experiment(model: Annotated[str, typer.Option("--model", "-m", help="Model to use")]):
     all_personalities = [PersonalityType.AGREEABLENESS, PersonalityType.CONSCIENTIOUSNESS, PersonalityType.EXTROVERSION,
                          PersonalityType.EMOTIONAL_STABILITY, PersonalityType.INTELLECT, PersonalityType.NO_PERSONALITY]
@@ -183,7 +184,7 @@ def run_experiment(model: Annotated[str, typer.Option("--model", "-m", help="Mod
 
     for personality in all_personalities:
         for interaction in all_interactions:
-            evaluate_personality(model=model, personality_type=personality, interaction_type=interaction)
+            evaluate_personality(model, personality, interaction)
 
 
 if __name__ == "__main__":
