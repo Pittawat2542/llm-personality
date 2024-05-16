@@ -6,7 +6,7 @@ class PersonalityType(Enum):
     AGREEABLENESS = "agreeableness"
     CONSCIENTIOUSNESS = "conscientiousness"
     EXTROVERSION = "extroversion"
-    EMOTIONAL_STABILITY = "neuroticism"
+    EMOTIONAL_STABILITY = "emotional_stability"
     INTELLECT = "intellect"
 
 
