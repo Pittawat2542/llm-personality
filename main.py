@@ -177,7 +177,7 @@ Answer:
 
 @app.command()
 def run_experiment(model: Annotated[str, typer.Option("--model", "-m", help="Model to use")]):
-    all_personalities = [PersonalityType.AGREEABLENESS, PersonalityType.CONSCIENTIOUSNESS, PersonalityType.EXTROVERSION,
+    all_personalities = [PersonalityType.EXTROVERSION, PersonalityType.AGREEABLENESS, PersonalityType.CONSCIENTIOUSNESS, 
                          PersonalityType.EMOTIONAL_STABILITY, PersonalityType.INTELLECT, PersonalityType.NO_PERSONALITY]
     all_interactions = [InteractionType.ALL_AT_ONCE, InteractionType.ONE_AT_A_TIME_NEW_CONTEXT,
                         InteractionType.ONE_AT_A_TIME_SAME_CONTEXT]
